@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="fr" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baby Girl Coach — Programme Nutrition & Sport</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,wght@0,300;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0e1712;
+    --bg-soft: #16221b;
+    --card: #1c2a21;
+    --pink: #34d399;
+    --pink-soft: #a7f3d0;
+    --gold: #ff8a5b;
+    --cream: #f4f3ec;
+    --cream-dim: #cdd6cd;
+    --line: rgba(244,243,236,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--cream);
+    font-family:'Manrope', sans-serif;
+    overflow-x:hidden;
+    transition:font-family 0.2s ease;
+  }
+  body[dir="rtl"]{font-family:'Tajawal', sans-serif;}
+  body[dir="rtl"] .display, body[dir="rtl"] h1, body[dir="rtl"] h2, body[dir="rtl"] h3, body[dir="rtl"] h4{
+    font-family:'Tajawal', sans-serif; letter-spacing:0;
+  }
+  .display{font-family:'Bebas Neue', sans-serif; letter-spacing:0.03em;}
+  .script{font-family:'Fraunces', serif; font-style:italic; font-weight:300;}
+  body[dir="rtl"] .script{font-family:'Tajawal', sans-serif; font-style:normal; font-weight:800;}
+
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 60% 40% at 15% 0%, rgba(52,211,153,0.14), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 100% 20%, rgba(255,138,91,0.10), transparent 60%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px; position:relative; z-index:1;}
+
+  /* NAV */
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px 24px; max-width:1080px; margin:0 auto; position:relative; z-index:20;
+    gap:14px; flex-wrap:wrap;
+  }
+  .brand{display:flex; align-items:baseline; gap:6px;}
+  .brand-mark{font-family:'Bebas Neue'; font-size:1.5rem; letter-spacing:0.06em;}
+  .brand-mark .accent{color:var(--pink);}
+  .nav-right{display:flex; align-items:center; gap:14px;}
+  nav a.cta{
+    border:1px solid var(--pink); color:var(--cream);
+    padding:9px 18px; border-radius:100px; text-decoration:none;
+    font-size:0.82rem; font-weight:700; letter-spacing:0.02em;
+    transition:background 0.25s ease, transform 0.2s ease;
+    white-space:nowrap;
+  }
+  nav a.cta:hover{background:var(--pink); transform:translateY(-1px);}
+
+  /* lang switcher */
+  .lang-switch{position:relative;}
+  .lang-btn{
+    display:flex; align-items:center; gap:8px;
+    background:rgba(255,243,236,0.06);
+    border:1px solid var(--line);
+    border-radius:100px;
+    padding:8px 14px;
+    color:var(--cream);
+    font-size:0.82rem; font-weight:700;
+    cursor:pointer;
+    font-family:'Manrope';
+  }
+  .lang-btn:hover{border-color:var(--pink);}
+  .lang-menu{
+    position:absolute; top:calc(100% + 8px); right:0;
+    background:var(--bg-soft); border:1px solid var(--line); border-radius:14px;
+    padding:6px; min-width:150px; display:none; flex-direction:column; gap:2px;
+    box-shadow:0 12px 30px rgba(0,0,0,0.4); z-index:30;
+  }
+  body[dir="rtl"] .lang-menu{right:auto; left:0;}
+  .lang-menu.open{display:flex;}
+  .lang-menu button{
+    background:transparent; border:none; color:var(--cream-dim);
+    text-align:left; padding:9px 12px; border-radius:9px; cursor:pointer;
+    font-family:'Manrope'; font-size:0.85rem; font-weight:600;
+    display:flex; align-items:center; gap:8px;
+  }
+  body[dir="rtl"] .lang-menu button{text-align:right;}
+  .lang-menu button:hover{background:rgba(52,211,153,0.14); color:var(--cream);}
+  .lang-menu button.active{color:var(--pink); font-weight:800;}
+
+  /* HERO */
+  .hero{
+    padding:50px 24px 90px;
+    max-width:1080px; margin:0 auto;
+    position:relative; z-index:1;
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;
+  }
+  .hero-left{min-width:0;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--pink-soft); font-weight:700; margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:""; width:26px; height:1px; background:var(--pink-soft);
+  }
+  h1.hero-title{
+    font-size:clamp(2.4rem, 6.4vw, 4.6rem);
+    line-height:0.96;
+    text-transform:uppercase;
+  }
+  body[dir="rtl"] h1.hero-title{text-transform:none;}
+  h1.hero-title .line2{color:var(--pink);}
+  .hero-sub{
+    margin-top:26px; max-width:460px;
+    font-size:1.02rem; line-height:1.65; color:var(--cream-dim);
+  }
+  .hero-actions{margin-top:34px; display:flex; gap:16px; flex-wrap:wrap; align-items:center;}
+  .btn-primary{
+    background:var(--pink); color:#0e1712; text-decoration:none;
+    padding:15px 30px; border-radius:100px; font-weight:800; font-size:0.95rem;
+    display:inline-flex; align-items:center; gap:10px;
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow:0 8px 24px rgba(52,211,153,0.25);
+    border:none; cursor:pointer; font-family:'Manrope';
+  }
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 12px 28px rgba(52,211,153,0.35);}
+  .btn-ghost{
+    color:var(--cream-dim); text-decoration:none; font-size:0.9rem; font-weight:600;
+    border-bottom:1px solid var(--line); padding-bottom:2px;
+  }
+
+  .signature{margin-top:56px; display:flex; align-items:center; gap:22px;}
+  .pulse-wrap{width:170px; height:64px; flex-shrink:0;}
+  .pulse-wrap svg{width:100%; height:100%; overflow:visible;}
+  .pulse-line{
+    fill:none; stroke:var(--pink); stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round;
+    stroke-dasharray:300; stroke-dashoffset:300;
+    animation:draw 2.6s ease-in-out infinite;
+  }
+  @keyframes draw{
+    0%{stroke-dashoffset:300;} 45%{stroke-dashoffset:0;} 100%{stroke-dashoffset:-300;}
+  }
+  .signature-text{font-size:0.82rem; color:var(--cream-dim); line-height:1.5; max-width:250px;}
+  .signature-text b{color:var(--cream); font-weight:700;}
+
+  /* HERO ILLUSTRATION */
+  .hero-art{
+    position:relative;
+    aspect-ratio:3/4;
+    border-radius:26px;
+    background:linear-gradient(160deg, #1c2a21, #0e1712 70%);
+    border:1px solid var(--line);
+    overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .hero-art img{width:100%; height:100%; object-fit:cover; display:block; filter:saturate(0.9) contrast(1.05);}
+  .hero-art-overlay{
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(14,23,18,0.05) 0%, rgba(14,23,18,0.75) 100%),
+      linear-gradient(120deg, rgba(52,211,153,0.28), rgba(255,138,91,0.14));
+    mix-blend-mode:multiply;
+    pointer-events:none;
+  }
+  .hero-art .float-badge{
+    position:absolute; bottom:18px; left:18px;
+    background:rgba(14,23,18,0.75);
+    backdrop-filter:blur(6px);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:12px 16px;
+    display:flex; align-items:center; gap:10px;
+  }
+  body[dir="rtl"] .hero-art .float-badge{left:auto; right:18px;}
+  .float-badge .dot{width:9px; height:9px; border-radius:50%; background:var(--gold); flex-shrink:0;}
+  .float-badge span{font-size:0.78rem; font-weight:700; color:var(--cream);}
+
+  /* SECTIONS */
+  .section{padding:70px 24px; max-width:1080px; margin:0 auto; position:relative; z-index:1;}
+  .section-head{margin-bottom:44px;}
+  .section-num{
+    font-size:0.78rem; color:var(--pink-soft); font-weight:700;
+    letter-spacing:0.14em; text-transform:uppercase; margin-bottom:12px;
+  }
+  h2.section-title{
+    font-family:'Bebas Neue'; font-size:clamp(2.1rem, 5vw, 3.2rem);
+    text-transform:uppercase; line-height:1;
+  }
+  body[dir="rtl"] h2.section-title{text-transform:none; font-family:'Tajawal';}
+  h2.section-title .script{text-transform:none; color:var(--gold); font-size:0.9em;}
+  .section-desc{margin-top:16px; color:var(--cream-dim); max-width:520px; line-height:1.6;}
+
+  .services{display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;}
+  .service-card{
+    background:var(--card); border:1px solid var(--line); border-radius:20px;
+    padding:30px 24px; position:relative; overflow:hidden;
+    transition:transform 0.25s ease, border-color 0.25s ease;
+  }
+  .service-card:hover{transform:translateY(-4px); border-color:rgba(52,211,153,0.4);}
+  .service-card::after{
+    content:""; position:absolute; top:-40px; right:-40px;
+    width:120px; height:120px; border-radius:50%;
+    background:radial-gradient(circle, rgba(52,211,153,0.14), transparent 70%);
+  }
+  .service-illus{width:100%; height:150px; margin-bottom:20px; border-radius:14px; overflow:hidden; background:rgba(244,243,236,0.03); position:relative;}
+  .service-illus img{width:100%; height:100%; object-fit:cover; display:block; filter:saturate(0.85) contrast(1.05); transition:transform 0.4s ease;}
+  .service-illus::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(14,23,18,0.05) 40%, rgba(14,23,18,0.85) 100%);
+  }
+  .service-card:hover .service-illus img{transform:scale(1.05);}
+  .service-card h3{
+    font-family:'Bebas Neue'; font-size:1.4rem; text-transform:uppercase; letter-spacing:0.02em; margin-bottom:10px;
+  }
+  body[dir="rtl"] .service-card h3{text-transform:none; font-family:'Tajawal'; font-weight:800;}
+  .service-card p{color:var(--cream-dim); font-size:0.9rem; line-height:1.6;}
+  .service-tag{
+    display:inline-block; margin-top:16px; font-size:0.72rem; letter-spacing:0.06em;
+    text-transform:uppercase; color:var(--gold); font-weight:700;
+  }
+  body[dir="rtl"] .service-tag{text-transform:none;}
+
+  .timeline{display:flex; flex-direction:column; gap:0; border-top:1px solid var(--line);}
+  .timeline-row{
+    display:grid; grid-template-columns:70px 1fr; gap:22px; padding:26px 0;
+    border-bottom:1px solid var(--line); align-items:start;
+  }
+  .timeline-week{font-family:'Bebas Neue'; font-size:1.05rem; color:var(--pink-soft);}
+  body[dir="rtl"] .timeline-week{font-family:'Tajawal'; font-weight:800;}
+  .timeline-row h4{font-size:1.02rem; font-weight:700; margin-bottom:6px;}
+  .timeline-row p{color:var(--cream-dim); font-size:0.88rem; line-height:1.6; max-width:520px;}
+
+  .form-section{
+    background:var(--bg-soft); border-radius:28px; padding:56px 40px;
+    margin:70px 24px 0; position:relative; z-index:1; border:1px solid var(--line);
+  }
+  .form-inner{max-width:640px; margin:0 auto;}
+  .form-head{text-align:center; margin-bottom:38px;}
+  .form-head h2{font-family:'Bebas Neue'; font-size:clamp(2rem,5vw,2.8rem); text-transform:uppercase;}
+  body[dir="rtl"] .form-head h2{text-transform:none; font-family:'Tajawal';}
+  .form-head p{color:var(--cream-dim); margin-top:12px; font-size:0.95rem;}
+  form{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .field{display:flex; flex-direction:column; gap:8px;}
+  .field.full{grid-column:1 / -1;}
+  label{font-size:0.78rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--pink-soft); font-weight:700;}
+  body[dir="rtl"] label{text-transform:none;}
+  input, select{
+    background:rgba(255,243,236,0.05); border:1px solid var(--line); border-radius:12px;
+    padding:14px 16px; color:var(--cream); font-family:inherit; font-size:0.95rem; outline:none;
+    transition:border-color 0.2s ease, background 0.2s ease; width:100%;
+  }
+  input::placeholder{color:rgba(255,243,236,0.35);}
+  input:focus, select:focus{border-color:var(--pink); background:rgba(255,243,236,0.08);}
+  select{appearance:none; -webkit-appearance:none;}
+  .field.select-wrap{position:relative;}
+  .field.select-wrap::after{
+    content:"▾"; position:absolute; right:16px; top:41px; color:var(--pink-soft); pointer-events:none; font-size:0.8rem;
+  }
+  body[dir="rtl"] .field.select-wrap::after{right:auto; left:16px;}
+  .submit-row{grid-column:1 / -1; margin-top:10px;}
+  button.whatsapp-btn{
+    width:100%; background:var(--pink); color:#0e1712; border:none; border-radius:100px;
+    padding:17px 24px; font-family:inherit; font-weight:800; font-size:1rem; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    transition:transform 0.2s ease, box-shadow 0.2s ease; box-shadow:0 8px 24px rgba(52,211,153,0.25);
+  }
+  button.whatsapp-btn:hover{transform:translateY(-2px); box-shadow:0 12px 30px rgba(52,211,153,0.35);}
+  button.whatsapp-btn svg{width:20px; height:20px; fill:#0e1712;}
+  .form-note{text-align:center; margin-top:16px; font-size:0.78rem; color:var(--cream-dim); opacity:0.8;}
+
+  /* ===== QUIZ ===== */
+  .quiz-wrap{position:relative;}
+  .quiz-progress{
+    width:100%; height:6px; background:rgba(244,243,236,0.08);
+    border-radius:100px; overflow:hidden; margin-bottom:10px;
+  }
+  .quiz-progress-bar{
+    height:100%; width:14.28%; background:linear-gradient(90deg, var(--pink), var(--gold));
+    border-radius:100px; transition:width 0.5s cubic-bezier(.16,.8,.3,1);
+  }
+  .quiz-step-label{
+    text-align:right; font-size:0.75rem; color:var(--cream-dim); font-weight:700;
+    letter-spacing:0.04em; margin-bottom:30px;
+  }
+  .quiz-step{display:none; animation:stepIn 0.45s cubic-bezier(.16,.8,.3,1);}
+  .quiz-step.active{display:block;}
+  @keyframes stepIn{
+    from{opacity:0; transform:translateX(18px);}
+    to{opacity:1; transform:translateX(0);}
+  }
+  .quiz-question{
+    font-family:'Bebas Neue'; font-size:clamp(1.5rem, 4vw, 2rem);
+    text-transform:uppercase; margin-bottom:24px; line-height:1.15;
+  }
+  body[dir="rtl"] .quiz-question{text-transform:none; font-family:'Tajawal'; font-weight:800;}
+  .quiz-options{display:flex; flex-direction:column; gap:12px;}
+  .quiz-option{
+    background:rgba(244,243,236,0.04); border:1.5px solid var(--line); border-radius:14px;
+    padding:17px 20px; color:var(--cream); font-family:inherit; font-size:0.98rem; font-weight:600;
+    text-align:left; cursor:pointer; transition:border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+  }
+  body[dir="rtl"] .quiz-option{text-align:right;}
+  .quiz-option:hover{border-color:var(--pink-soft); background:rgba(244,243,236,0.07); transform:translateY(-1px);}
+  .quiz-option.selected{border-color:var(--pink); background:rgba(52,211,153,0.14); color:var(--pink-soft);}
+  .quiz-input{font-size:1.15rem; padding:18px 20px;}
+  .quiz-unit{display:block; margin-top:8px; font-size:0.78rem; color:var(--cream-dim); text-transform:uppercase; letter-spacing:0.05em;}
+  .quiz-nav{display:flex; justify-content:space-between; align-items:center; margin-top:32px; gap:14px;}
+  .quiz-back{
+    background:transparent; border:1px solid var(--line); color:var(--cream-dim);
+    padding:13px 22px; border-radius:100px; font-family:inherit; font-weight:700; font-size:0.88rem;
+    cursor:pointer; transition:border-color 0.2s ease, color 0.2s ease;
+  }
+  .quiz-back:hover{border-color:var(--pink-soft); color:var(--cream);}
+  .quiz-back:disabled{opacity:0; pointer-events:none;}
+  .quiz-next{
+    background:var(--pink); color:var(--bg); border:none;
+    padding:13px 30px; border-radius:100px; font-family:inherit; font-weight:800; font-size:0.9rem;
+    cursor:pointer; transition:transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow:0 8px 20px rgba(52,211,153,0.25);
+  }
+  .quiz-next:hover{transform:translateY(-2px);}
+  .quiz-next:disabled{opacity:0.35; pointer-events:none; box-shadow:none;}
+  .quiz-recap{
+    background:rgba(244,243,236,0.04); border:1px solid var(--line); border-radius:14px;
+    padding:20px 22px; margin-bottom:22px; display:flex; flex-direction:column; gap:10px;
+  }
+  .quiz-recap-row{display:flex; justify-content:space-between; gap:12px; font-size:0.9rem;}
+  .quiz-recap-row span:first-child{color:var(--cream-dim);}
+  .quiz-recap-row span:last-child{font-weight:700; text-align:right;}
+  body[dir="rtl"] .quiz-recap-row span:last-child{text-align:left;}
+
+  footer{text-align:center; padding:50px 24px 34px; color:var(--cream-dim); font-size:0.82rem; position:relative; z-index:1;}
+  footer .brand-mark{justify-content:center; display:flex; margin-bottom:10px;}
+
+  @media (max-width: 900px){
+    .hero{grid-template-columns:1fr;}
+    .hero-art{aspect-ratio:16/9; order:-1;}
+  }
+  @media (max-width: 780px){
+    .services{grid-template-columns:1fr;}
+    form{grid-template-columns:1fr;}
+    .form-section{padding:40px 22px; margin:60px 14px 0;}
+    .signature{flex-direction:column; align-items:flex-start; gap:14px;}
+  }
+  @media (prefers-reduced-motion: reduce){ .pulse-line{animation:none; stroke-dashoffset:0;} }
+
+  /* ===== ANIMATIONS ===== */
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity 0.8s cubic-bezier(.16,.8,.3,1), transform 0.8s cubic-bezier(.16,.8,.3,1);}
+  .reveal.in-view{opacity:1; transform:translateY(0);}
+  .reveal.d1{transition-delay:0.08s;} .reveal.d2{transition-delay:0.16s;}
+  .reveal.d3{transition-delay:0.24s;} .reveal.d4{transition-delay:0.32s;}
+
+  nav{
+    position:sticky; top:0; z-index:50;
+    transition:background 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease;
+  }
+  nav.scrolled{
+    background:rgba(14,23,18,0.82);
+    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    box-shadow:0 8px 28px rgba(0,0,0,0.35);
+    padding-top:14px; padding-bottom:14px;
+  }
+
+  .hero-art{ perspective:1200px; transition:transform 0.25s ease-out; will-change:transform; }
+  .hero-art img{ transition:transform 0.6s cubic-bezier(.16,.8,.3,1); }
+
+  .service-card{ perspective:900px; will-change:transform; transition:transform 0.25s ease-out, border-color 0.25s ease; }
+
+  @keyframes floatBadge{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-7px);} }
+  .float-badge{ animation:floatBadge 3.4s ease-in-out infinite; }
+
+  @keyframes pulseGlow{
+    0%,100%{ box-shadow:0 8px 24px rgba(52,211,153,0.28); }
+    50%{ box-shadow:0 10px 38px rgba(52,211,153,0.5); }
+  }
+  .btn-primary.pulse-cta{ animation:pulseGlow 2.6s ease-in-out infinite; }
+
+  @keyframes drift{
+    0%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(20px,-25px) scale(1.06); }
+    100%{ transform:translate(0,0) scale(1); }
+  }
+  body::after{
+    content:""; position:fixed; top:-10%; right:-10%; width:50vw; height:50vw;
+    max-width:600px; max-height:600px;
+    background:radial-gradient(circle, rgba(255,138,91,0.10), transparent 65%);
+    pointer-events:none; z-index:0; animation:drift 16s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    .float-badge, .btn-primary.pulse-cta, body::after{animation:none;}
+  }
+</style>
+</head>
+<body id="bodyEl">
+
+<nav>
+  <div class="brand">
+    <span class="brand-mark">BABY GIRL <span class="accent">COACH</span></span>
+  </div>
+  <div class="nav-right">
+    <div class="lang-switch">
+      <button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">🌐 <span id="langLabel">Français</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button onclick="setLang('fr')" data-lang-opt="fr">🇫🇷 Français</button>
+        <button onclick="setLang('en')" data-lang-opt="en">🇬🇧 English</button>
+        <button onclick="setLang('ar')" data-lang-opt="ar">🇲🇦 العربية</button>
+        <button onclick="setLang('es')" data-lang-opt="es">🇪🇸 Español</button>
+      </div>
+    </div>
+    <a class="cta" href="#reserver" data-i18n="nav_cta">Réserver</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-left">
+    <div class="eyebrow" data-i18n="eyebrow">Coaching nutrition & sport</div>
+    <h1 class="hero-title">
+      <span data-i18n="hero_line1">TON CORPS,</span><br>
+      <span class="line2" data-i18n="hero_line2">TA RÈGLE.</span>
+    </h1>
+    <p class="hero-sub" data-i18n="hero_sub">Un programme d'alimentation fait pour toi, des séances d'entraînement adaptées à ton niveau, et un suivi réel jusqu'au bout de ton abonnement. Pas de plan générique — que du sur-mesure.</p>
+    <div class="hero-actions">
+      <a href="#reserver" class="btn-primary pulse-cta" data-i18n="hero_btn1">Démarrer mon programme</a>
+      <a href="#services" class="btn-ghost" data-i18n="hero_btn2">Voir comment ça marche</a>
+    </div>
+    <div class="signature">
+      <div class="pulse-wrap">
+        <svg viewBox="0 0 190 70" preserveAspectRatio="none">
+          <path class="pulse-line" d="M0,35 L35,35 L48,10 L60,60 L72,35 L84,35 L92,20 L100,48 L108,35 L190,35"/>
+        </svg>
+      </div>
+      <div class="signature-text"><b data-i18n="sig_b">Un seul rythme à suivre : le tien.</b> <span data-i18n="sig_p">Chaque programme est ajusté semaine après semaine selon tes résultats.</span></div>
+    </div>
+  </div>
+
+  <div class="hero-art">
+    <img src="https://images.unsplash.com/photo-1761035190790-aa1a3472f7fc?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="Séance de coaching" loading="lazy">
+    <div class="hero-art-overlay"></div>
+    <div class="float-badge">
+      <div class="dot"></div>
+      <span data-i18n="badge_text">Coaching 100% personnalisé</span>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="services">
+  <div class="section-head">
+    <div class="section-num reveal" data-i18n="s1_num">01 — Ce qui est inclus</div>
+    <h2 class="section-title reveal d1"><span data-i18n="s1_title1">Trois piliers,</span> <span class="script" data-i18n="s1_title2">un seul objectif</span></h2>
+    <p class="section-desc reveal d2" data-i18n="s1_desc">Ton abonnement combine ces trois services, pensés pour avancer ensemble et non séparément.</p>
+  </div>
+
+  <div class="services">
+    <div class="service-card reveal">
+      <div class="service-illus">
+        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?fm=jpg&q=75&w=700&auto=format&fit=crop" alt="Nutrition" loading="lazy">
+      </div>
+      <h3 data-i18n="svc1_title">Programme de repas</h3>
+      <p data-i18n="svc1_desc">Un plan alimentaire personnalisé selon ton poids, ta taille, tes goûts et ton objectif — perte de poids, prise de masse ou maintien.</p>
+      <span class="service-tag" data-i18n="svc1_tag">Nutrition</span>
+    </div>
+
+    <div class="service-card reveal d1">
+      <div class="service-illus">
+        <img src="https://images.unsplash.com/photo-1544033527-b192daee1f5b?fm=jpg&q=75&w=700&auto=format&fit=crop" alt="Entraînement" loading="lazy">
+      </div>
+      <h3 data-i18n="svc2_title">Programme d'entraînement</h3>
+      <p data-i18n="svc2_desc">Des séances d'exercices adaptées à ton niveau et ton matériel disponible, à la salle ou à la maison.</p>
+      <span class="service-tag" data-i18n="svc2_tag">Sport</span>
+    </div>
+
+    <div class="service-card reveal d2">
+      <div class="service-illus">
+        <img src="https://images.unsplash.com/photo-1435527173128-983b87201f4d?fm=jpg&q=75&w=700&auto=format&fit=crop" alt="Suivi" loading="lazy">
+      </div>
+      <h3 data-i18n="svc3_title">Suivi continu</h3>
+      <p data-i18n="svc3_desc">Un accompagnement tout au long de ton abonnement : ajustements, réponses à tes questions, motivation constante.</p>
+      <span class="service-tag" data-i18n="svc3_tag">Suivi</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div class="section-num reveal" data-i18n="s2_num">02 — Le déroulé</div>
+    <h2 class="section-title reveal d1"><span data-i18n="s2_title1">De la</span> <span class="script" data-i18n="s2_title2">réservation</span> <span data-i18n="s2_title3">au résultat</span></h2>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-row reveal">
+      <div class="timeline-week" data-i18n="step1_num">Étape 1</div>
+      <div>
+        <h4 data-i18n="step1_title">Tu remplis le formulaire</h4>
+        <p data-i18n="step1_desc">Nom, ville, poids et taille — les infos de base pour construire ton profil.</p>
+      </div>
+    </div>
+    <div class="timeline-row reveal d1">
+      <div class="timeline-week" data-i18n="step2_num">Étape 2</div>
+      <div>
+        <h4 data-i18n="step2_title">On discute sur WhatsApp</h4>
+        <p data-i18n="step2_desc">Le formulaire t'envoie directement sur WhatsApp avec tes infos déjà prêtes — on ajuste les détails ensemble.</p>
+      </div>
+    </div>
+    <div class="timeline-row reveal d2">
+      <div class="timeline-week" data-i18n="step3_num">Étape 3</div>
+      <div>
+        <h4 data-i18n="step3_title">Tu reçois ton programme</h4>
+        <p data-i18n="step3_desc">Plan de repas + programme d'entraînement personnalisés, prêts à suivre dès le premier jour.</p>
+      </div>
+    </div>
+    <div class="timeline-row reveal d3">
+      <div class="timeline-week" data-i18n="step4_num">Étape 4</div>
+      <div>
+        <h4 data-i18n="step4_title">Suivi jusqu'au bout</h4>
+        <p data-i18n="step4_desc">Tout au long de ton abonnement, ajustements et accompagnement selon ton évolution.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="form-section reveal" id="reserver">
+  <div class="form-inner">
+    <div class="form-head">
+      <h2 data-i18n="form_title">Réserve ta place</h2>
+      <p data-i18n="form_sub">Réponds à quelques questions, ça t'enverra directement sur WhatsApp avec tes infos.</p>
+    </div>
+
+    <div class="quiz-wrap">
+      <div class="quiz-progress">
+        <div class="quiz-progress-bar" id="quizProgressBar"></div>
+      </div>
+      <div class="quiz-step-label"><span id="quizStepNum">1</span> / <span id="quizStepTotal">7</span></div>
+
+      <form id="bookingForm">
+
+        <!-- Step 1: Goal -->
+        <div class="quiz-step active" data-step="1">
+          <h3 class="quiz-question" data-i18n="q_goal">Quel est ton objectif principal ?</h3>
+          <div class="quiz-options">
+            <button type="button" class="quiz-option" data-field="goal" data-value="loss" data-i18n="goal_loss">Perte de poids</button>
+            <button type="button" class="quiz-option" data-field="goal" data-value="gain" data-i18n="goal_gain">Prise de masse</button>
+            <button type="button" class="quiz-option" data-field="goal" data-value="tone" data-i18n="goal_tone">Maintien / tonification</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Name -->
+        <div class="quiz-step" data-step="2">
+          <h3 class="quiz-question" data-i18n="q_name">Comment tu t'appelles ?</h3>
+          <div class="field full">
+            <input type="text" id="name" data-i18n-ph="ph_name" placeholder="Ton nom" class="quiz-input" required>
+          </div>
+        </div>
+
+        <!-- Step 3: City -->
+        <div class="quiz-step" data-step="3">
+          <h3 class="quiz-question" data-i18n="q_city">Dans quelle ville es-tu ?</h3>
+          <div class="field full">
+            <input type="text" id="city" data-i18n-ph="ph_city" placeholder="Ta ville" class="quiz-input" required>
+          </div>
+        </div>
+
+        <!-- Step 4: Weight -->
+        <div class="quiz-step" data-step="4">
+          <h3 class="quiz-question" data-i18n="q_weight">Quel est ton poids actuel ?</h3>
+          <div class="field full">
+            <input type="number" id="weight" placeholder="65" min="20" max="250" class="quiz-input" required>
+            <span class="quiz-unit">kg</span>
+          </div>
+        </div>
+
+        <!-- Step 5: Height -->
+        <div class="quiz-step" data-step="5">
+          <h3 class="quiz-question" data-i18n="q_height">Et ta taille ?</h3>
+          <div class="field full">
+            <input type="number" id="height" placeholder="165" min="100" max="230" class="quiz-input" required>
+            <span class="quiz-unit">cm</span>
+          </div>
+        </div>
+
+        <!-- Step 6: Health -->
+        <div class="quiz-step" data-step="6">
+          <h3 class="quiz-question" data-i18n="q_health">As-tu un problème de santé ?</h3>
+          <div class="quiz-options">
+            <button type="button" class="quiz-option" data-field="health" data-value="no" data-i18n="health_no">Non</button>
+            <button type="button" class="quiz-option" data-field="health" data-value="yes" data-i18n="health_yes">Oui</button>
+          </div>
+          <div class="field full" id="healthDetailWrap" style="display:none; margin-top:18px;">
+            <label for="healthDetail" data-i18n="lbl_health_detail">Précise ton problème de santé</label>
+            <input type="text" id="healthDetail" data-i18n-ph="ph_health_detail" placeholder="Ex: asthme, diabète, blessure au genou..." class="quiz-input">
+          </div>
+        </div>
+
+        <!-- Step 7: Recap + Send -->
+        <div class="quiz-step" data-step="7">
+          <h3 class="quiz-question" data-i18n="q_recap">Vérifie tes infos avant d'envoyer</h3>
+          <div class="quiz-recap" id="quizRecap"></div>
+          <button type="submit" class="whatsapp-btn">
+            <svg viewBox="0 0 24 24"><path d="M17.6 6.3A8.8 8.8 0 0012 4a8.9 8.9 0 00-7.7 13.4L3 21l3.7-1.2A8.9 8.9 0 0012 21a8.9 8.9 0 006.3-15.2c-.2-.2-.5-.4-.7-.5zM12 19.3a7.3 7.3 0 01-3.7-1l-.3-.2-2.7.9.9-2.6-.2-.3A7.4 7.4 0 1112 19.3zm4-5.5c-.2-.1-1.3-.6-1.5-.7s-.4-.1-.5.1-.6.7-.7.8-.3.2-.5.1a6 6 0 01-1.8-1.1 6.6 6.6 0 01-1.2-1.5c-.1-.2 0-.4.1-.5l.3-.4.2-.3a.4.4 0 000-.4c0-.1-.5-1.3-.7-1.7s-.4-.4-.5-.4h-.5a.9.9 0 00-.6.3 2.7 2.7 0 00-.9 2 4.7 4.7 0 001 2.5 10.7 10.7 0 004.1 3.6c.6.2 1 .4 1.4.5a3.4 3.4 0 001.5.1 2.5 2.5 0 001.6-1.1 1.9 1.9 0 00.1-1.1c-.1-.1-.2-.2-.4-.3z"/></svg>
+            <span data-i18n="submit_btn">Envoyer sur WhatsApp</span>
+          </button>
+        </div>
+
+        <div class="quiz-nav">
+          <button type="button" class="quiz-back" id="quizBack" data-i18n="quiz_back">Retour</button>
+          <button type="button" class="quiz-next" id="quizNext" data-i18n="quiz_next">Suivant</button>
+        </div>
+      </form>
+    </div>
+
+    <p class="form-note" data-i18n="form_note">En envoyant, tu seras redirigée vers WhatsApp avec tes informations déjà remplies.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="brand-mark">BABY GIRL <span style="color:var(--pink)">&nbsp;COACH</span></div>
+  <span data-i18n="footer_text">Coaching nutrition & sport — sur mesure, du premier jour au dernier.</span>
+</footer>
+
+<script>
+const translations = {
+  fr: {
+    nav_cta:"Réserver", eyebrow:"Coaching nutrition & sport",
+    hero_line1:"TON CORPS,", hero_line2:"TA RÈGLE.",
+    hero_sub:"Un programme d'alimentation fait pour toi, des séances d'entraînement adaptées à ton niveau, et un suivi réel jusqu'au bout de ton abonnement. Pas de plan générique — que du sur-mesure.",
+    hero_btn1:"Démarrer mon programme", hero_btn2:"Voir comment ça marche",
+    sig_b:"Un seul rythme à suivre : le tien.", sig_p:"Chaque programme est ajusté semaine après semaine selon tes résultats.",
+    badge_text:"Coaching 100% personnalisé",
+    s1_num:"01 — Ce qui est inclus", s1_title1:"Trois piliers,", s1_title2:"un seul objectif",
+    s1_desc:"Ton abonnement combine ces trois services, pensés pour avancer ensemble et non séparément.",
+    svc1_title:"Programme de repas", svc1_desc:"Un plan alimentaire personnalisé selon ton poids, ta taille, tes goûts et ton objectif — perte de poids, prise de masse ou maintien.", svc1_tag:"Nutrition",
+    svc2_title:"Programme d'entraînement", svc2_desc:"Des séances d'exercices adaptées à ton niveau et ton matériel disponible, à la salle ou à la maison.", svc2_tag:"Sport",
+    svc3_title:"Suivi continu", svc3_desc:"Un accompagnement tout au long de ton abonnement : ajustements, réponses à tes questions, motivation constante.", svc3_tag:"Suivi",
+    s2_num:"02 — Le déroulé", s2_title1:"De la", s2_title2:"réservation", s2_title3:"au résultat",
+    step1_num:"Étape 1", step1_title:"Tu remplis le formulaire", step1_desc:"Nom, ville, poids et taille — les infos de base pour construire ton profil.",
+    step2_num:"Étape 2", step2_title:"On discute sur WhatsApp", step2_desc:"Le formulaire t'envoie directement sur WhatsApp avec tes infos déjà prêtes — on ajuste les détails ensemble.",
+    step3_num:"Étape 3", step3_title:"Tu reçois ton programme", step3_desc:"Plan de repas + programme d'entraînement personnalisés, prêts à suivre dès le premier jour.",
+    step4_num:"Étape 4", step4_title:"Suivi jusqu'au bout", step4_desc:"Tout au long de ton abonnement, ajustements et accompagnement selon ton évolution.",
+    form_title:"Réserve ta place", form_sub:"Réponds à quelques questions, ça t'enverra directement sur WhatsApp avec tes infos.",
+    q_goal:"Quel est ton objectif principal ?", q_name:"Comment tu t'appelles ?", q_city:"Dans quelle ville es-tu ?",
+    q_weight:"Quel est ton poids actuel ?", q_height:"Et ta taille ?", q_health:"As-tu un problème de santé ?",
+    q_recap:"Vérifie tes infos avant d'envoyer", quiz_back:"Retour", quiz_next:"Suivant",
+    recap_goal:"Objectif", recap_name:"Nom", recap_city:"Ville", recap_weight:"Poids", recap_height:"Taille", recap_health:"Santé",
+    lbl_name:"Nom complet", ph_name:"Ton nom", lbl_city:"Ville", ph_city:"Ta ville", lbl_goal:"Objectif",
+    goal_loss:"Perte de poids", goal_gain:"Prise de masse", goal_tone:"Maintien / tonification",
+    lbl_weight:"Poids (kg)", lbl_height:"Taille (cm)",
+    lbl_health:"As-tu un problème de santé ?", health_no:"Non", health_yes:"Oui",
+    lbl_health_detail:"Précise ton problème de santé", ph_health_detail:"Ex: asthme, diabète, blessure au genou...",
+    submit_btn:"Envoyer sur WhatsApp",
+    form_note:"En envoyant, tu seras redirigée vers WhatsApp avec tes informations déjà remplies.",
+    footer_text:"Coaching nutrition & sport — sur mesure, du premier jour au dernier.",
+    wa_greeting:"Salam, je m'appelle", wa_city:"Ville", wa_goal:"Objectif", wa_weight:"Poids", wa_height:"Taille",
+    wa_health:"Problème de santé",
+    wa_closing:"Je veux démarrer mon programme avec Baby Girl Coach."
+  },
+  en: {
+    nav_cta:"Book now", eyebrow:"Nutrition & fitness coaching",
+    hero_line1:"YOUR BODY,", hero_line2:"YOUR RULES.",
+    hero_sub:"A meal plan built for you, workouts matched to your level, and real follow-up for the whole length of your subscription. No generic plan — fully custom.",
+    hero_btn1:"Start my program", hero_btn2:"See how it works",
+    sig_b:"Only one pace to follow: yours.", sig_p:"Every program is adjusted week after week based on your results.",
+    badge_text:"100% personalized coaching",
+    s1_num:"01 — What's included", s1_title1:"Three pillars,", s1_title2:"one goal",
+    s1_desc:"Your subscription combines these three services, built to work together, not apart.",
+    svc1_title:"Meal plan", svc1_desc:"A personalized meal plan based on your weight, height, taste and goal — weight loss, muscle gain or maintenance.", svc1_tag:"Nutrition",
+    svc2_title:"Workout program", svc2_desc:"Training sessions matched to your level and available equipment, at the gym or at home.", svc2_tag:"Training",
+    svc3_title:"Ongoing follow-up", svc3_desc:"Support for your entire subscription: adjustments, answers to your questions, constant motivation.", svc3_tag:"Follow-up",
+    s2_num:"02 — How it works", s2_title1:"From", s2_title2:"booking", s2_title3:"to results",
+    step1_num:"Step 1", step1_title:"You fill the form", step1_desc:"Name, city, weight and height — the basics to build your profile.",
+    step2_num:"Step 2", step2_title:"We talk on WhatsApp", step2_desc:"The form sends you straight to WhatsApp with your info already filled in — we fine-tune the details together.",
+    step3_num:"Step 3", step3_title:"You get your program", step3_desc:"Personalized meal plan + workout program, ready to follow from day one.",
+    step4_num:"Step 4", step4_title:"Follow-up all along", step4_desc:"Throughout your subscription, adjustments and support based on your progress.",
+    form_title:"Book your spot", form_sub:"Answer a few questions, it will send you straight to WhatsApp with your info.",
+    q_goal:"What's your main goal?", q_name:"What's your name?", q_city:"What city are you in?",
+    q_weight:"What's your current weight?", q_height:"And your height?", q_health:"Do you have any health condition?",
+    q_recap:"Check your info before sending", quiz_back:"Back", quiz_next:"Next",
+    recap_goal:"Goal", recap_name:"Name", recap_city:"City", recap_weight:"Weight", recap_height:"Height", recap_health:"Health",
+    lbl_name:"Full name", ph_name:"Your name", lbl_city:"City", ph_city:"Your city", lbl_goal:"Goal",
+    goal_loss:"Weight loss", goal_gain:"Muscle gain", goal_tone:"Maintenance / toning",
+    lbl_weight:"Weight (kg)", lbl_height:"Height (cm)",
+    lbl_health:"Do you have any health condition?", health_no:"No", health_yes:"Yes",
+    lbl_health_detail:"Please specify your health condition", ph_health_detail:"E.g. asthma, diabetes, knee injury...",
+    submit_btn:"Send on WhatsApp",
+    form_note:"By sending, you'll be redirected to WhatsApp with your info already filled in.",
+    footer_text:"Nutrition & fitness coaching — custom-built, from day one to the last.",
+    wa_greeting:"Hi, my name is", wa_city:"City", wa_goal:"Goal", wa_weight:"Weight", wa_height:"Height",
+    wa_health:"Health condition",
+    wa_closing:"I want to start my program with Baby Girl Coach."
+  },
+  ar: {
+    nav_cta:"احجزي الآن", eyebrow:"تدريب في التغذية والرياضة",
+    hero_line1:"جسمك،", hero_line2:"بقانونك.",
+    hero_sub:"برنامج غذائي مصمم خصيصا ليك، حصص رياضية على قد مستواك، ومتابعة حقيقية طول مدة الاشتراك. ماكاينش برنامج عام — كولشي مصمم عليك نتي.",
+    hero_btn1:"ابدئي برنامجي", hero_btn2:"شوفي كيفاش كيخدم",
+    sig_b:"إيقاع واحد لي خاصك تتبعي: ديالك نتي.", sig_p:"كل برنامج كيتعدل من أسبوع لأسبوع حسب النتائج ديالك.",
+    badge_text:"تدريب شخصي 100%",
+    s1_num:"01 — أشنو داخل فالخدمة", s1_title1:"تلات ركائز،", s1_title2:"هدف واحد",
+    s1_desc:"الاشتراك ديالك كيجمع هاد التلات خدمات، مصممين باش يخدمو مع بعضياتهم.",
+    svc1_title:"برنامج الماكلة", svc1_desc:"خطة غذائية مصممة على حساب الوزن، الطول، الذوق والهدف ديالك — تنقيص الوزن، زيادة العضلات ولا الحفاظ على الوزن.", svc1_tag:"تغذية",
+    svc2_title:"برنامج التمارين", svc2_desc:"حصص رياضية على قد مستواك والمعدات المتوفرة عندك، فالنادي ولا فالدار.", svc2_tag:"رياضة",
+    svc3_title:"متابعة مستمرة", svc3_desc:"مواكبة طول مدة الاشتراك: تعديلات، جواب على الأسئلة ديالك، تحفيز مستمر.", svc3_tag:"متابعة",
+    s2_num:"02 — كيفاش كيمشي الأمر", s2_title1:"من", s2_title2:"الحجز", s2_title3:"للنتيجة",
+    step1_num:"الخطوة 1", step1_title:"عمري الاستمارة", step1_desc:"الاسم، المدينة، الوزن والطول — المعلومات الأساسية باش نبنيو الملف ديالك.",
+    step2_num:"الخطوة 2", step2_title:"كنهضرو فواتساب", step2_desc:"الاستمارة كتوجهك مباشرة لواتساب بالمعلومات ديالك جاهزة — كنضبطو التفاصيل مع بعضياتنا.",
+    step3_num:"الخطوة 3", step3_title:"كتوصلك البرنامج ديالك", step3_desc:"خطة الماكلة + برنامج التمارين مصممين خصيصا ليك، جاهزين من اليوم الأول.",
+    step4_num:"الخطوة 4", step4_title:"متابعة لآخر الاشتراك", step4_desc:"طول مدة الاشتراك، تعديلات ومواكبة حسب التطور ديالك.",
+    form_title:"احجزي بلاصتك", form_sub:"جاوبي على شوية أسئلة، غادي توجهك مباشرة لواتساب بالمعلومات ديالك.",
+    q_goal:"شنو هو الهدف الرئيسي ديالك؟", q_name:"شنو سميتك؟", q_city:"فأي مدينة كاين؟",
+    q_weight:"شحال الوزن ديالك دابا؟", q_height:"و الطول؟", q_health:"واش عندك شي مشكل صحي؟",
+    q_recap:"تأكدي من المعلومات ديالك قبل الإرسال", quiz_back:"رجوع", quiz_next:"التالي",
+    recap_goal:"الهدف", recap_name:"الاسم", recap_city:"المدينة", recap_weight:"الوزن", recap_height:"الطول", recap_health:"الصحة",
+    lbl_name:"الاسم الكامل", ph_name:"سميتك", lbl_city:"المدينة", ph_city:"المدينة ديالك", lbl_goal:"الهدف",
+    goal_loss:"تنقيص الوزن", goal_gain:"زيادة العضلات", goal_tone:"الحفاظ على الوزن",
+    lbl_weight:"الوزن (كغ)", lbl_height:"الطول (سم)",
+    lbl_health:"واش عندك شي مشكل صحي؟", health_no:"لا", health_yes:"إيه",
+    lbl_health_detail:"وضحي المشكل الصحي ديالك", ph_health_detail:"مثلا: الربو، السكري، جرح فالركبة...",
+    submit_btn:"صيفطي فواتساب",
+    form_note:"مجرد ما تصيفطي، غادي تتوجهي لواتساب بالمعلومات ديالك جاهزة.",
+    footer_text:"تدريب في التغذية والرياضة — مصمم خصيصا ليك، من اليوم الأول للأخير.",
+    wa_greeting:"سلام، سميتي", wa_city:"المدينة", wa_goal:"الهدف", wa_weight:"الوزن", wa_height:"الطول",
+    wa_health:"المشكل الصحي",
+    wa_closing:"بغيت نبدا البرنامج ديالي مع Baby Girl Coach."
+  },
+  es: {
+    nav_cta:"Reservar", eyebrow:"Coaching de nutrición y deporte",
+    hero_line1:"TU CUERPO,", hero_line2:"TU REGLA.",
+    hero_sub:"Un plan de alimentación hecho para ti, entrenamientos adaptados a tu nivel, y un seguimiento real durante toda tu suscripción. Nada genérico — todo a tu medida.",
+    hero_btn1:"Empezar mi programa", hero_btn2:"Ver cómo funciona",
+    sig_b:"Un solo ritmo a seguir: el tuyo.", sig_p:"Cada programa se ajusta semana tras semana según tus resultados.",
+    badge_text:"Coaching 100% personalizado",
+    s1_num:"01 — Qué incluye", s1_title1:"Tres pilares,", s1_title2:"un solo objetivo",
+    s1_desc:"Tu suscripción combina estos tres servicios, pensados para avanzar juntos, no por separado.",
+    svc1_title:"Plan de comidas", svc1_desc:"Un plan alimenticio personalizado según tu peso, altura, gustos y objetivo — pérdida de peso, ganancia muscular o mantenimiento.", svc1_tag:"Nutrición",
+    svc2_title:"Programa de entrenamiento", svc2_desc:"Sesiones de ejercicio adaptadas a tu nivel y al equipo disponible, en el gimnasio o en casa.", svc2_tag:"Deporte",
+    svc3_title:"Seguimiento continuo", svc3_desc:"Acompañamiento durante toda tu suscripción: ajustes, respuestas a tus preguntas, motivación constante.", svc3_tag:"Seguimiento",
+    s2_num:"02 — Cómo funciona", s2_title1:"De la", s2_title2:"reserva", s2_title3:"al resultado",
+    step1_num:"Paso 1", step1_title:"Rellenas el formulario", step1_desc:"Nombre, ciudad, peso y altura — la información básica para crear tu perfil.",
+    step2_num:"Paso 2", step2_title:"Hablamos por WhatsApp", step2_desc:"El formulario te lleva directo a WhatsApp con tus datos ya listos — ajustamos los detalles juntos.",
+    step3_num:"Paso 3", step3_title:"Recibes tu programa", step3_desc:"Plan de comidas + programa de entrenamiento personalizados, listos desde el primer día.",
+    step4_num:"Paso 4", step4_title:"Seguimiento hasta el final", step4_desc:"Durante toda tu suscripción, ajustes y acompañamiento según tu evolución.",
+    form_title:"Reserva tu lugar", form_sub:"Responde algunas preguntas, te llevará directo a WhatsApp con tus datos.",
+    q_goal:"¿Cuál es tu objetivo principal?", q_name:"¿Cómo te llamas?", q_city:"¿En qué ciudad estás?",
+    q_weight:"¿Cuál es tu peso actual?", q_height:"¿Y tu altura?", q_health:"¿Tienes algún problema de salud?",
+    q_recap:"Revisa tu información antes de enviar", quiz_back:"Atrás", quiz_next:"Siguiente",
+    recap_goal:"Objetivo", recap_name:"Nombre", recap_city:"Ciudad", recap_weight:"Peso", recap_height:"Altura", recap_health:"Salud",
+    lbl_name:"Nombre completo", ph_name:"Tu nombre", lbl_city:"Ciudad", ph_city:"Tu ciudad", lbl_goal:"Objetivo",
+    goal_loss:"Pérdida de peso", goal_gain:"Ganancia muscular", goal_tone:"Mantenimiento / tonificación",
+    lbl_weight:"Peso (kg)", lbl_height:"Altura (cm)",
+    lbl_health:"¿Tienes algún problema de salud?", health_no:"No", health_yes:"Sí",
+    lbl_health_detail:"Especifica tu problema de salud", ph_health_detail:"Ej: asma, diabetes, lesión de rodilla...",
+    submit_btn:"Enviar por WhatsApp",
+    form_note:"Al enviar, serás redirigida a WhatsApp con tu información ya completada.",
+    footer_text:"Coaching de nutrición y deporte — a tu medida, del primer al último día.",
+    wa_greeting:"Hola, me llamo", wa_city:"Ciudad", wa_goal:"Objetivo", wa_weight:"Peso", wa_height:"Altura",
+    wa_health:"Problema de salud",
+    wa_closing:"Quiero empezar mi programa con Baby Girl Coach."
+  }
+};
+
+const langNames = { fr:"Français", en:"English", ar:"العربية", es:"Español" };
+let currentLang = 'fr';
+
+function applyTranslations(lang){
+  const dict = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(dict[key] !== undefined) el.textContent = dict[key];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+    const key = el.getAttribute('data-i18n-ph');
+    if(dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
+  });
+  document.getElementById('langLabel').textContent = langNames[lang];
+  const body = document.getElementById('bodyEl');
+  const html = document.getElementById('htmlRoot');
+  if(lang === 'ar'){
+    body.setAttribute('dir','rtl'); html.setAttribute('lang','ar');
+  } else {
+    body.setAttribute('dir','ltr'); html.setAttribute('lang', lang);
+  }
+  document.querySelectorAll('[data-lang-opt]').forEach(btn=>{
+    btn.classList.toggle('active', btn.getAttribute('data-lang-opt') === lang);
+  });
+  currentLang = lang;
+}
+
+function setLang(lang){
+  applyTranslations(lang);
+  document.getElementById('langMenu').classList.remove('open');
+  if(typeof currentStep !== 'undefined' && typeof totalSteps !== 'undefined' && currentStep === totalSteps){
+    buildRecap();
+  }
+}
+
+function toggleLangMenu(){
+  document.getElementById('langMenu').classList.toggle('open');
+}
+
+document.addEventListener('click', function(e){
+  const switcher = document.querySelector('.lang-switch');
+  if(!switcher.contains(e.target)) document.getElementById('langMenu').classList.remove('open');
+});
+
+const healthDetailWrap = document.getElementById('healthDetailWrap');
+
+/* ===== Scroll reveal ===== */
+const revealObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('in-view');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ===== Nav scroll state ===== */
+const navEl = document.querySelector('nav');
+window.addEventListener('scroll', ()=>{
+  if(window.scrollY > 40) navEl.classList.add('scrolled');
+  else navEl.classList.remove('scrolled');
+}, { passive: true });
+
+/* ===== 3D tilt effect (hero image) ===== */
+function apply3DTilt(el, maxTilt){
+  el.addEventListener('mousemove', (e)=>{
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    el.style.transform = `perspective(1000px) rotateY(${x * maxTilt}deg) rotateX(${-y * maxTilt}deg) scale(1.02)`;
+  });
+  el.addEventListener('mouseleave', ()=>{
+    el.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)';
+  });
+}
+const heroArt = document.querySelector('.hero-art');
+if(heroArt) apply3DTilt(heroArt, 10);
+document.querySelectorAll('.service-card').forEach(card => apply3DTilt(card, 6));
+
+/* ===== QUIZ ENGINE ===== */
+const quizData = { goal:'', name:'', city:'', weight:'', height:'', health:'', healthDetail:'' };
+const quizSteps = Array.from(document.querySelectorAll('.quiz-step'));
+const totalSteps = quizSteps.length;
+let currentStep = 1;
+
+document.getElementById('quizStepTotal').textContent = totalSteps;
+
+function goToStep(n){
+  quizSteps.forEach(s => s.classList.toggle('active', parseInt(s.dataset.step) === n));
+  currentStep = n;
+  document.getElementById('quizStepNum').textContent = n;
+  document.getElementById('quizProgressBar').style.width = (n / totalSteps * 100) + '%';
+  document.getElementById('quizBack').disabled = (n === 1);
+  const nextBtn = document.getElementById('quizNext');
+  const backBtn = document.getElementById('quizBack');
+  if(n === totalSteps){
+    nextBtn.style.display = 'none';
+    backBtn.style.display = 'inline-block';
+    buildRecap();
+  } else {
+    nextBtn.style.display = 'inline-block';
+    nextBtn.textContent = translations[currentLang].quiz_next;
+  }
+  updateNextState();
+}
+
+function currentStepValid(){
+  switch(currentStep){
+    case 1: return !!quizData.goal;
+    case 2: return document.getElementById('name').value.trim().length > 0;
+    case 3: return document.getElementById('city').value.trim().length > 0;
+    case 4: return document.getElementById('weight').value.trim().length > 0;
+    case 5: return document.getElementById('height').value.trim().length > 0;
+    case 6: return !!quizData.health;
+    default: return true;
+  }
+}
+
+function updateNextState(){
+  const nextBtn = document.getElementById('quizNext');
+  if(currentStep === totalSteps){ return; }
+  nextBtn.disabled = !currentStepValid();
+}
+
+document.querySelectorAll('.quiz-option').forEach(btn=>{
+  btn.addEventListener('click', function(){
+    const field = this.dataset.field;
+    const value = this.dataset.value;
+    quizData[field] = value;
+    this.parentElement.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected'));
+    this.classList.add('selected');
+    if(field === 'health'){
+      healthDetailWrap.style.display = (value === 'yes') ? 'block' : 'none';
+      if(value !== 'yes') document.getElementById('healthDetail').value = '';
+    }
+    updateNextState();
+  });
+});
+
+['name','city','weight','height','healthDetail'].forEach(id=>{
+  document.getElementById(id).addEventListener('input', function(){
+    quizData[id] = this.value.trim();
+    updateNextState();
+  });
+});
+
+document.getElementById('quizNext').addEventListener('click', function(){
+  if(!currentStepValid()) return;
+  if(currentStep < totalSteps) goToStep(currentStep + 1);
+});
+document.getElementById('quizBack').addEventListener('click', function(){
+  if(currentStep > 1) goToStep(currentStep - 1);
+});
+
+function buildRecap(){
+  const dict = translations[currentLang];
+  const goalLabel = { loss: dict.goal_loss, gain: dict.goal_gain, tone: dict.goal_tone }[quizData.goal] || quizData.goal;
+  const healthLabel = quizData.health === 'yes'
+    ? dict.health_yes + (quizData.healthDetail ? ' — ' + quizData.healthDetail : '')
+    : dict.health_no;
+
+  const rows = [
+    [dict.recap_goal, goalLabel],
+    [dict.recap_name, quizData.name],
+    [dict.recap_city, quizData.city],
+    [dict.recap_weight, quizData.weight + ' kg'],
+    [dict.recap_height, quizData.height + ' cm'],
+    [dict.recap_health, healthLabel]
+  ];
+  document.getElementById('quizRecap').innerHTML = rows.map(r =>
+    `<div class="quiz-recap-row"><span>${r[0]}</span><span>${r[1]}</span></div>`
+  ).join('');
+}
+
+document.getElementById('bookingForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const dict = translations[currentLang];
+  const goalText = { loss: dict.goal_loss, gain: dict.goal_gain, tone: dict.goal_tone }[quizData.goal] || quizData.goal;
+
+  let healthLine;
+  if(quizData.health === 'yes'){
+    healthLine = `${dict.wa_health}: ${dict.health_yes}${quizData.healthDetail ? ' — ' + quizData.healthDetail : ''}`;
+  } else {
+    healthLine = `${dict.wa_health}: ${dict.health_no}`;
+  }
+
+  const message =
+    `${dict.wa_greeting} ${quizData.name}.\n` +
+    `${dict.wa_city}: ${quizData.city}\n` +
+    `${dict.wa_goal}: ${goalText}\n` +
+    `${dict.wa_weight}: ${quizData.weight} kg\n` +
+    `${dict.wa_height}: ${quizData.height} cm\n` +
+    `${healthLine}\n` +
+    `${dict.wa_closing}`;
+
+  const phone = "212675451136";
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+});
+
+goToStep(1);
+
+applyTranslations('fr');
+</script>
+
+</body>
+</html>
